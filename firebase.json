@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "Angular-Pokedex",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

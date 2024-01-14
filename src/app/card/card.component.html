@@ -1,0 +1,26 @@
+<div class="card-container">
+<div *ngFor="let currentPokemon of pokemonList" >
+  <mat-card [style.background]="currentPokemon.backgroundTypeColor" class="full-scr-card">
+
+    <mat-card-title-group>
+      <mat-card-subtitle>#{{currentPokemon?.id}}</mat-card-subtitle>
+      <mat-card-title>{{currentPokemon?.name}}</mat-card-title>
+      <div class="types">
+        <img *ngFor="let type of currentPokemon.types" [src]="'../../assets/types/' + type.type.name + '.svg'" alt="{{ type.type.name }}">
+      </div>
+
+      <img class="poke-img" mat-card-sm-image [src]="currentPokemon?.sprites?.front_default" alt="">
+    </mat-card-title-group>
+  </mat-card>
+</div>
+</div>
+
+<div class="btn-load-more">
+  <button (click)="loadMorePokemon()">
+    Load more
+  </button>
+</div>
+
+<div *ngIf="isLoading" class="loading-indicator">
+  Loading...
+</div>

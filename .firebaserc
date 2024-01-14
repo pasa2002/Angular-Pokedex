@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pokedex-8a140": {
+      "hosting": {
+        "Angular-Pokedex": [
+          "pokedex-8a140"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pokedex-8a140"
+  }
+}

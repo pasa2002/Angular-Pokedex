@@ -1,0 +1,69 @@
+.card-container{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin-bottom: 2rem;
+.full-scr-card{
+  margin-left: 2rem;
+  width: 20rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  position: relative;
+  min-height: 10rem;
+
+  &:hover{
+    cursor: pointer;
+    scale: 1.1;
+    transition: scale 225ms ease-in-out;
+  }
+
+  .poke-img{
+    width: 12rem;
+    height: 9rem;
+    position: absolute;
+    right: -2.2rem;
+  }
+  .types{
+    position: absolute;
+    bottom: 1rem;
+    img{
+      padding-right: 1rem;
+      width: 3rem;
+    }
+  }
+}
+}
+
+.loading-indicator {
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.btn-load-more{
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+
+  button{
+    box-shadow:5px 5px 15px 5px rgba(219, 214, 217, 0.63);
+    padding: 10px;
+    border-radius: 10px;
+    border: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #d60c0c;
+    color: white;
+    text-transform: uppercase;
+
+    &:hover{
+      box-shadow:5px 5px 15px 5px rgba(100,83,92,0.63);
+      transition: box-shadow 225ms ease-in-out;
+      transform: scale(1.1);
+      transition: transform 225ms ease-in-out;
+    }
+  }
+}
