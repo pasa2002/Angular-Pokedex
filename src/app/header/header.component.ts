@@ -18,6 +18,6 @@ export class HeaderComponent {
   constructor(private pokemonService: ServicesService) {}
 
   onSearch(): void {
-    this.searchEvent.emit(this.searchQuery);
+    this.searchEvent.emit(this.searchQuery.trim());
   }
 }

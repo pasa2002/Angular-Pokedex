@@ -14,11 +14,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { CardComponent } from './card/card.component';
 import {MatCardModule} from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CardDetailComponent } from './card-detail/card-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CardComponent
+    CardComponent,
+    CardDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatIconModule,
     MatTooltipModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

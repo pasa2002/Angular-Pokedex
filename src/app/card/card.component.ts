@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, SimpleChanges } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 import {
@@ -34,6 +34,26 @@ export class CardComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   currentPokemon: any;
   currentPokemonType: string | undefined;
+
+  @Input() searchQuery: string = '';
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchQuery']) {
+      this.filterPokemon();
+    }
+  }
+
+  filterPokemon() {
+    if (!this.searchQuery) {
+      // Reset to original list if search query is empty
+      this.getPokemonData(this.pokemonService.initialUrl);
+    } else {
+      // Filter logic here
+      this.pokemonList = this.pokemonList.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }}
 
   constructor(
     private pokemonService: ServicesService,
@@ -130,7 +150,6 @@ export class CardComponent implements OnInit {
 
   getBackgroundColor(type: any): string {
     this.typeName = type.name;
-    console.log('Type:', this.typeName);
 
     switch (this.typeName) {
       case 'grass':

@@ -1,5 +1,6 @@
 <div class="card-container">
 <div *ngFor="let currentPokemon of pokemonList" >
+  <a [routerLink]="['/pokemon', currentPokemon.id]">
   <mat-card [style.background]="currentPokemon.backgroundTypeColor" class="full-scr-card">
 
     <mat-card-title-group>
@@ -12,6 +13,7 @@
       <img class="poke-img" mat-card-sm-image [src]="currentPokemon?.sprites?.front_default" alt="">
     </mat-card-title-group>
   </mat-card>
+</a>
 </div>
 </div>
 
