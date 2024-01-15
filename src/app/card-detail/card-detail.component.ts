@@ -1,6 +1,8 @@
 import { Component , OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServicesService } from '../services/services.service';
+import { PokemonUtilityService } from '../services/pokemon-utility.service';
+import { Pokemonin } from '../models/pokemonin.models';
 
 @Component({
   selector: 'app-card-detail',
@@ -12,7 +14,8 @@ export class CardDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private pokemonService: ServicesService
+    private pokemonService: ServicesService,
+    private pokemonUtitlityService: PokemonUtilityService
   ) {}
 
   ngOnInit() {
@@ -20,6 +23,8 @@ export class CardDetailComponent {
     this.pokemonService.getData(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
       .subscribe(data => {
         this.pokemon = data;
+        console.log(data)
+        this.pokemon.backgroundTypeColor = this.pokemonUtitlityService.getBackgroundColor(this.pokemon.types[0]?.type);
       });
   }
 }

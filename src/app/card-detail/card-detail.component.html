@@ -1,1 +1,21 @@
-<p>card-detail works!</p>
+<app-header-detail></app-header-detail>
+
+<div class="header">
+  <h1 [style.color]="pokemon?.backgroundTypeColor">{{pokemon?.name}}</h1>
+  <button  [style.background]="pokemon?.backgroundTypeColor">{{pokemon?.types[0]?.type?.name}} Pokémon </button>
+</div>
+
+<div class="content">
+  <div class="stats">
+
+  </div>
+
+  <div class="main-image">
+    <img class="poke-img" mat-card-sm-image [src]="pokemon?.sprites?.other?.['official-artwork']?.front_default" alt="{{ pokemon?.name }}">
+  </div>
+
+  <div class="power">
+
+  </div>
+</div>
+

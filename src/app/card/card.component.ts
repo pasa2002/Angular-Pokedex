@@ -1,27 +1,19 @@
-import { Component, OnInit, OnDestroy, Input, SimpleChanges } from '@angular/core';
-import { ServicesService } from '../services/services.service';
-import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 import {
-  debounceTime,
-  distinctUntilChanged,
-  take,
-  takeUntil,
-} from 'rxjs/operators';
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  SimpleChanges,
+} from '@angular/core';
+import { ServicesService } from '../services/services.service';
+import { ScrollDispatcher} from '@angular/cdk/scrolling';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CardDetailComponent } from '../card-detail/card-detail.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PokemonUtilityService } from '../services/pokemon-utility.service';
+import { Pokemonin } from '../models/pokemonin.models';
 
-interface Pokemon {
-  currentPokemonType: any;
-  id: number;
-  name: string;
-  types: { type: { name: string } }[];
-  sprites: {
-    front_default: string;
-    official_artwork: {
-      front_default: string;
-    };
-  };
-  backgroundTypeColor: string;
-}
 
 @Component({
   selector: 'app-card',
@@ -31,12 +23,11 @@ interface Pokemon {
 export class CardComponent implements OnInit {
   isLoading: boolean = false;
   private unsubscribe$ = new Subject<void>();
-  pokemonList: Pokemon[] = [];
+  pokemonList: Pokemonin[] = [];
   currentPokemon: any;
   currentPokemonType: string | undefined;
 
   @Input() searchQuery: string = '';
-
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['searchQuery']) {
@@ -50,14 +41,17 @@ export class CardComponent implements OnInit {
       this.getPokemonData(this.pokemonService.initialUrl);
     } else {
       // Filter logic here
-      this.pokemonList = this.pokemonList.filter(pokemon =>
+      this.pokemonList = this.pokemonList.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
-    }}
+    }
+  }
 
   constructor(
     private pokemonService: ServicesService,
-    private scrollDispatcher: ScrollDispatcher
+    private scrollDispatcher: ScrollDispatcher,
+    private dialog:MatDialog,
+    private pokemonUtilityService: PokemonUtilityService
   ) {}
 
   ngOnInit(): void {
@@ -68,8 +62,6 @@ export class CardComponent implements OnInit {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
-
 
   getPokemonData(url: string) {
     this.isLoading = true;
@@ -91,8 +83,6 @@ export class CardComponent implements OnInit {
   }
 
   private offset = 50; // Start from 51st Pokemon for the next load
-
-
 
   loadMorePokemon() {
     console.log('Attempting to load more Pokémon...');
@@ -123,7 +113,6 @@ export class CardComponent implements OnInit {
       );
   }
 
-
   getPokemonDetails(pokemonList: any[]) {
     pokemonList.forEach((pokemon: any, index: number) => {
       this.pokemonService.getData(pokemon.url).subscribe(
@@ -132,9 +121,11 @@ export class CardComponent implements OnInit {
           Object.assign(pokemon, details);
 
           // Set the background color for the current Pokemon
-          pokemon.backgroundTypeColor = this.getBackgroundColor(
+          pokemon.backgroundTypeColor = this.pokemonUtilityService.getBackgroundColor(
             pokemon.types[0]?.type
           );
+
+
 
           // Set the current Pokemon type for the template using the index
           pokemon.currentPokemonType = pokemon.types[0]?.type.name;
@@ -146,50 +137,11 @@ export class CardComponent implements OnInit {
     });
   }
 
-  typeName: any;
 
-  getBackgroundColor(type: any): string {
-    this.typeName = type.name;
 
-    switch (this.typeName) {
-      case 'grass':
-        return '#a7e8bd';
-      case 'fire':
-        return '#ff7477';
-      case 'water':
-        return '#bad7f2';
-      case 'electric':
-        return '#f4f482';
-      case 'normal':
-        return '#d6d2d2';
-      case 'fighting':
-        return '#f25757';
-      case 'flying':
-        return '#90f3ff';
-      case 'poison':
-        return '#c287e8';
-      case 'ground':
-        return '#f7ef81';
-      case 'rock':
-        return '#dddfdf';
-      case 'bug':
-        return '#fcf4dd';
-      case 'ghost':
-        return '#c46df7';
-      case 'psychic':
-        return '#ff70a6';
-      case 'ice':
-        return '#b2c9ff';
-      case 'dragon':
-        return '#9381ff';
-      case 'dark':
-        return '#fbbb8d';
-      case 'steel':
-        return '#d0dbef';
-      case 'fairy':
-        return '#ff97c4';
-      default:
-        return 'rgba(0, 0, 0, 1)';
-    }
-  }
-}
+  openDialog(pokemon: any): void {
+    this.dialog.open(CardDetailComponent, {
+      width: '250px',
+      data: pokemon
+    });
+}}

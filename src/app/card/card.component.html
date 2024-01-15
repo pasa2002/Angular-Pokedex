@@ -10,7 +10,9 @@
         <img *ngFor="let type of currentPokemon.types" [src]="'../../assets/types/' + type.type.name + '.svg'" alt="{{ type.type.name }}">
       </div>
 
-      <img class="poke-img" mat-card-sm-image [src]="currentPokemon?.sprites?.front_default" alt="">
+      <img class="poke-img" mat-card-sm-image [src]="currentPokemon?.sprites?.other?.['official-artwork']?.front_default" alt="{{ currentPokemon?.name }}">
+
+
     </mat-card-title-group>
   </mat-card>
 </a>

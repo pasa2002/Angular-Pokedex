@@ -8,10 +8,6 @@ import { Component , Input} from '@angular/core';
 export class AppComponent {
   title = 'Angular-Pokedex';
 
-  @Input() searchQuery: string = '';
 
-onSearch(query: string): void {
-  this.searchQuery = query;
-}
 
 }

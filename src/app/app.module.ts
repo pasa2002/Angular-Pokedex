@@ -16,12 +16,17 @@ import {MatCardModule} from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CardDetailComponent } from './card-detail/card-detail.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FirstPageComponent } from './first-page/first-page.component';
+import { HeaderDetailComponent } from './header-detail/header-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CardComponent,
-    CardDetailComponent
+    CardDetailComponent,
+    FirstPageComponent,
+    HeaderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,9 @@ import { CardDetailComponent } from './card-detail/card-detail.component';
     MatTooltipModule,
     MatCardModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
