@@ -40,6 +40,25 @@
   }
 }
 
+.navigation-arrows{
+  button{
+    background-color: transparent;
+    border: transparent;
+    font-size: 2rem;
+    font-weight: 800;
+    position: absolute;
+  }
+
+  .previous{
+    top: 50%;
+  }
+
+  .next{
+    top: 50%;
+    right: 10px;
+  }
+}
+
 @media only screen and (max-width: 1250px) {
 
   .header{

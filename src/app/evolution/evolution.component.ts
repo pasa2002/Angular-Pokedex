@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServicesService } from '../services/services.service';
 import { PokemonUtilityService } from '../services/pokemon-utility.service';
-
+import { CurrentPokemonService } from '../services/current-pokemon.service';
+import { Subscription } from 'rxjs';
 interface PokemonEvolution {
   name: string;
   id: number;
@@ -18,24 +19,37 @@ interface PokemonEvolution {
 export class EvolutionComponent implements OnInit {
   pokemon: any;
   evolutions: PokemonEvolution[] = [];
-
+  private subscription = new Subscription();
   constructor(
     private pokemonService: ServicesService,
     private pokemonUtilityService: PokemonUtilityService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private currentPokemonService: CurrentPokemonService,
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const pokemonId = params.get('id');
-      this.pokemonService.getData(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-        .subscribe(pokemonData => {
-          this.pokemon = pokemonData;
-          this.pokemon.backgroundTypeColor = this.pokemonUtilityService.getBackgroundColor(this.pokemon.types[0]?.type);
+    this.subscription.add(
+      this.currentPokemonService.currentPokemonId.subscribe(id => {
+        this.evolutions = []; // Clear the array on new ID
+        this.loadEvolutionData(id);
+      })
+    );
+  }
 
-          // Fetch evolution data
-          this.fetchEvolutionData(this.pokemon.species.url);
+  private loadEvolutionData(pokemonId: number) {
+    // First, get the basic Pokémon data to access the species URL
+    this.pokemonService.getData(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).subscribe(pokemonData => {
+      // Clear existing evolutions
+      this.evolutions = [];
+
+      // Fetch the species data
+      this.pokemonService.getData(pokemonData.species.url).subscribe(speciesData => {
+        // Fetch the evolution chain
+        this.pokemonService.getData(speciesData.evolution_chain.url).subscribe(evolutionChainData => {
+          // Now you have the evolution chain data, process it
+          this.processEvolutionData(evolutionChainData.chain);
         });
+      });
     });
   }
 
@@ -50,9 +64,8 @@ export class EvolutionComponent implements OnInit {
   }
 
   private processEvolutionData(evolutionChain: any) {
-    // Process the evolution chain to extract relevant data
-    // This is a placeholder implementation, you'll need to parse the evolution chain correctly
-    // For example:
+
+    this.evolutions = [];
     let currentStage = evolutionChain;
     while(currentStage) {
       this.evolutions.push({

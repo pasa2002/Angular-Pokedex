@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonUtilityService } from '../services/pokemon-utility.service';
 import { ServicesService } from '../services/services.service';
 import { ActivatedRoute } from '@angular/router';
+import { CurrentPokemonService } from '../services/current-pokemon.service';
 
 @Component({
   selector: 'app-poke-stat',
@@ -15,17 +16,23 @@ export class PokeStatComponent implements OnInit{
     private pokrmonService: ServicesService,
     private pokemonUtilityService: PokemonUtilityService,
     private route: ActivatedRoute,
+    private currentPokemonService: CurrentPokemonService,
   ){}
 
-  ngOnInit(){
-    const pokemonId = this.route.snapshot.paramMap.get('id');
-    console.log(pokemonId)
+  ngOnInit(): void {
 
-    this.pokrmonService.getData(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-    .subscribe(data=>{
+
+    this.currentPokemonService.currentPokemonId.subscribe(id => {
+      this.pokrmonService.getData(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .subscribe(data => {
       this.pokemon = data;
       console.log(data);
       this.pokemon.backgroundTypeColor = this.pokemonUtilityService.getBackgroundColor(this.pokemon.types[0]?.type);
-    })
-  }
+
+      })
+  })
+
+
+
+}
 }
