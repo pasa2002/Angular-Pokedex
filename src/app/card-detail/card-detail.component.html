@@ -2,12 +2,12 @@
 
 <div class="header">
   <h1 [style.color]="pokemon?.backgroundTypeColor">{{pokemon?.name}}</h1>
-  <button  [style.background]="pokemon?.backgroundTypeColor">{{pokemon?.types[0]?.type?.name}} Pokémon </button>
+  <button  [style.background]="pokemon?.backgroundTypeColor">{{pokemon?.types[0]?.type?.name}} Pokémon</button>
 </div>
 
 <div class="content">
   <div class="stats">
-
+    <app-poke-stat></app-poke-stat>
   </div>
 
   <div class="main-image">
@@ -15,7 +15,11 @@
   </div>
 
   <div class="power">
-
+    <app-power></app-power>
   </div>
 </div>
 
+
+<div>
+  <app-evolution></app-evolution>
+</div>

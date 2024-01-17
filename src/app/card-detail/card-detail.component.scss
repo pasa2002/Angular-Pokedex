@@ -4,6 +4,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-top: 3rem;
   h1{
   font-size: 3.2rem;
   text-transform: uppercase;
@@ -22,11 +23,44 @@
 
 .content{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   align-items: center;
 
   .main-image{
     margin-top: 20px;
+
+    .poke-img{
+      max-width: 100%;
+      height: auto;
+      min-width:475px;
+      min-height: 475px;
+      object-fit: cover;
+    }
   }
+}
+
+@media only screen and (max-width: 1250px) {
+
+  .header{
+    margin-top: 3rem;
+  }
+  .content{
+    flex-direction: column;
+    margin-top: 3rem;
+  }
+  .stat{
+    margin-left: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+
+ .poke-img{
+  max-width: 100%;
+  height: auto;
+  min-width:unset !important;
+  min-height: unset !important;
+  object-fit: cover;
+ }
 }

@@ -1,0 +1,22 @@
+<div class="stat">
+  <div class="stat-content">
+    <h3>ID</h3>
+    <p>{{pokemon?.id}}</p>
+  </div>
+  <div class="stat-content">
+    <h3>Height</h3>
+    <p>{{pokemon?.height}} cm</p>
+  </div>
+  <div class="stat-content">
+    <h3>Weight</h3>
+    <p>{{pokemon?.weight}} g</p>
+  </div>
+  <div class="stat-content">
+    <h3>Abilities</h3>
+    <button class="ability" [style.background]="pokemon?.backgroundTypeColor">{{pokemon?.abilities[0]?.ability?.name}}</button>
+  </div>
+  <div class="stat-content">
+    <h3>Forms</h3>
+    <p>{{pokemon?.forms[0]?.name}}</p>
+  </div>
+</div>

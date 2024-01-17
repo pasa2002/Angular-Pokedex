@@ -11,10 +11,13 @@ margin-bottom: 2rem;
   position: relative;
   min-height: 10rem;
 
+
   &:hover{
     cursor: pointer;
     scale: 1.1;
     transition: scale 225ms ease-in-out;
+
+
   }
 
   .poke-img{
@@ -22,6 +25,7 @@ margin-bottom: 2rem;
     height: 9rem;
     position: absolute;
     right: -2.2rem;
+
   }
   .types{
     position: absolute;

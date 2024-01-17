@@ -19,6 +19,14 @@ import { CardDetailComponent } from './card-detail/card-detail.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FirstPageComponent } from './first-page/first-page.component';
 import { HeaderDetailComponent } from './header-detail/header-detail.component';
+import { PowerComponent } from './power/power.component';
+import { PokeStatComponent } from './poke-stat/poke-stat.component';
+import { NgChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EvolutionComponent } from './evolution/evolution.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +34,10 @@ import { HeaderDetailComponent } from './header-detail/header-detail.component';
     CardComponent,
     CardDetailComponent,
     FirstPageComponent,
-    HeaderDetailComponent
+    HeaderDetailComponent,
+    PowerComponent,
+    PokeStatComponent,
+    EvolutionComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +52,9 @@ import { HeaderDetailComponent } from './header-detail/header-detail.component';
     MatCardModule,
     HttpClientModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgChartsModule,
+    NgbModule
 
   ],
   providers: [],

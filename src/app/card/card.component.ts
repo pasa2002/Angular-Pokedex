@@ -99,7 +99,6 @@ export class CardComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (data) => {
-          console.log('Fetched additional Pokémon:', data.results);
           const newPokemonList = data.results;
           this.getPokemonDetails(newPokemonList);
           this.pokemonList = [...this.pokemonList, ...newPokemonList];

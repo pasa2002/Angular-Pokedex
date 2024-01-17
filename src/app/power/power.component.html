@@ -1,0 +1,17 @@
+<div *ngIf="pokemon" class="pokemon-stats">
+  <div class="stat" *ngFor="let stat of pokemon.stats">
+    <div class="stat-name">
+      <label>{{ stat.stat.name | uppercase }}</label>
+    </div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" [style.width]="stat.base_stat + '%'" [style.backgroundColor]="pokemon.backgroundTypeColor">
+        {{ stat.base_stat }}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+

@@ -20,7 +20,7 @@ export class PokemonUtilityService {
       case 'water':
         return '#bad7f2';
       case 'electric':
-        return '#f4f482';
+        return '#EEC759';
       case 'normal':
         return '#d6d2d2';
       case 'fighting':
@@ -32,9 +32,9 @@ export class PokemonUtilityService {
       case 'ground':
         return '#f7ef81';
       case 'rock':
-        return '#dddfdf';
+        return '#E86A33';
       case 'bug':
-        return '#fcf4dd';
+        return '#E4C478';
       case 'ghost':
         return '#c46df7';
       case 'psychic':

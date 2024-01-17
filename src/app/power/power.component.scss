@@ -1,0 +1,53 @@
+@keyframes grow {
+  from {
+    width: 0%;
+  }
+
+}
+
+.pokemon-stats {
+  margin-right: 5rem;
+  transform: perspective(400px) rotateY(-25deg);
+  transition: transform 225ms ease-in-out;
+  &:hover{
+    transform: rotateY(0deg);
+
+  }
+  .stat {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+
+    .stat-name {
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    .progress {
+      background-color: #eee;
+      flex-grow: 1;
+      margin-left: 10px;
+      height: 24px;
+      width: 150px;
+    }
+
+    .progress-bar {
+      transition: width 225ms ease;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      color: white;
+      padding-right: 10px;
+      animation: grow 2s ease; /* Apply the animation */
+    }
+  }
+}
+@media only screen and (max-width: 1250px) {
+
+  .pokemon-stats{
+    margin-right:0 !important;
+    margin-top:3rem;
+    transform: unset;
+    margin-bottom: 4rem;
+  }
+  }

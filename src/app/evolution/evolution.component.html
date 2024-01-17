@@ -1,0 +1,24 @@
+<div class="header-evolution">
+  <button [style.background]="pokemon?.backgroundTypeColor">
+    Evolution Chain
+  </button>
+</div>
+<div class="evolution-chain">
+  <ng-container *ngFor="let evolution of evolutions; let i = index; let isLast=last">
+    <div class="evolution-content">
+      <img [src]="evolution.imageUrl" alt="{{ evolution.name }}" />
+      <p>#{{ evolution.id }}</p>
+      <div [style.background]="pokemon?.backgroundTypeColor">
+        {{ evolution.name | uppercase }}
+      </div>
+    </div>
+
+    <div *ngIf="!isLast" class="arr-level">
+      <div class="levels">
+        Level: {{ evolutions[i + 1].level }}
+      </div>
+      <span class="arrow  arrow-right">→</span>
+      <span class="arrow arrow-down" style="display: none;">↓</span>
+    </div>
+  </ng-container>
+</div>

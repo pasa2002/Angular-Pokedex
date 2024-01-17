@@ -9,7 +9,7 @@ import { Pokemonin } from '../models/pokemonin.models';
   templateUrl: './card-detail.component.html',
   styleUrls: ['./card-detail.component.scss']
 })
-export class CardDetailComponent {
+export class CardDetailComponent implements OnInit{
   pokemon: any;
 
   constructor(
@@ -23,7 +23,6 @@ export class CardDetailComponent {
     this.pokemonService.getData(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
       .subscribe(data => {
         this.pokemon = data;
-        console.log(data)
         this.pokemon.backgroundTypeColor = this.pokemonUtitlityService.getBackgroundColor(this.pokemon.types[0]?.type);
       });
   }

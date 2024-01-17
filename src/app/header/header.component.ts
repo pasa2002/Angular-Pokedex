@@ -8,10 +8,6 @@ import { ServicesService } from '../services/services.service';
 })
 export class HeaderComponent {
 
-  toggleDarkTheme():void{
-    document.body.classList.toggle('dark-mode')
-  }
-
   searchQuery: string = '';
   @Output() searchEvent = new EventEmitter<string>();
 
